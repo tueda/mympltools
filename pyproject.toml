@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "mympltools"
+version = "21.10.0"
+description = "My personal utilities and settings for Matplotlib."
+authors = ["Takahiro Ueda <tueda@st.seikei.ac.jp>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+importlib-metadata = {version = ">=1.0", python = "<3.8"}
+matplotlib = "^3.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.15.0"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+taskipy = "^1.9.0"
+# for vscode
+black = {version = "^21.9b0", allow-prereleases = true}
+ipykernel = "^6.4.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.report]
+exclude_lines = [
+    "@overload",
+    "if TYPE_CHECKING:",
+    "pragma: no cover",
+    "raise AssertionError()",
+    "return NotImplemented",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+pretty = true
+show_error_codes = true
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = [
+    "cycler.*",
+    "importlib_metadata",
+    "matplotlib.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov-report=html",
+    "--cov-report=term",
+    "--cov=mympltools",
+    "--doctest-modules",
+]
+
+[tool.taskipy.tasks]
+# Prepare a development environment.
+prepare = "pre-commit install && pre-commit install --hook-type commit-msg"
+
+# Run linters (+ fix).
+lint = "pre-commit run --all-files"
+
+# Run tests.
+test = "pytest"
