@@ -155,6 +155,7 @@ def line_annotate(
 # Changes:
 # - `x` can be omitted.
 # - `x2` added.
+# - `rotation` works.
 class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
     """Annotation to a line."""
 
@@ -237,19 +238,19 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
         }
         super().__init__(text, (x, y), xytext=xytext, textcoords=textcoords, **kwargs)
 
-    def get_rotation(self) -> NDArray1D:
+    def get_rotation(self) -> float:
         """Determine the angle of the slope of the neighbours."""
         trans_data = self._line.get_transform()
         dx, dy = np.diff(  # type: ignore[no-untyped-call]
             trans_data.transform(self._neighbours), axis=0
         ).squeeze()
-        return np.rad2deg(np.arctan2(dy, dx))  # type: ignore[no-any-return]
+        return float(np.rad2deg(np.arctan2(dy, dx)) + super().get_rotation())
 
     def update_positions(self, renderer: matplotlib.backend_bases.RendererBase) -> None:
         """Update the relative position of the annotation text."""
         xytext = (
             matplotlib.transforms.Affine2D()
-            .rotate_deg(self.get_rotation())
+            .rotate_deg(self.get_rotation() - super().get_rotation())
             .transform(self._xytext)
         )
         self.set_position(xytext)
