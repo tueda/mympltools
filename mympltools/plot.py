@@ -120,14 +120,15 @@ def errorband(
 # Based on https://stackoverflow.com/a/64707070
 # Changes:
 # - `line` can be a list (the return value of `ax.plot`).
-# - Use c=line.get_color() by default.
+# - Use ``c=line.get_color()`` by default.
 # - `x` can be omitted.
-# - x2 added.
+# - `x2` and `xytext` added.
 def line_annotate(
     text: str,
     line: Union[matplotlib.lines.Line2D, List[matplotlib.lines.Line2D]],
     x: Optional[float] = None,
     x2: Optional[float] = None,
+    xytext: Tuple[float, float] = (0, 5),
     *args: Any,
     **kwargs: Any,
 ) -> "LineAnnotation":
@@ -142,7 +143,7 @@ def line_annotate(
         kwargs.update(c=line.get_color())
 
     ax = line.axes
-    a = LineAnnotation(text, line, x, x2, *args, **kwargs)
+    a = LineAnnotation(text, line, x, x2, xytext, *args, **kwargs)
     if "clip_on" in kwargs:
         a.set_clip_path(ax.patch)
     ax.add_artist(a)
@@ -161,9 +162,9 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
         self,
         text: str,
         line: matplotlib.lines.Line2D,
-        x: Optional[float] = None,
-        x2: Optional[float] = None,
-        xytext: Tuple[float, float] = (0, 5),
+        x: Optional[float],
+        x2: Optional[float],
+        xytext: Tuple[float, float],
         textcoords: str = "offset points",
         **kwargs: Any,
     ) -> None:
