@@ -28,14 +28,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import mympltools as mt
 
-x = np.linspace(-5, 5)
-y = np.exp(x)
+mt.use("21.10")  # Use the style.
 
 fig, ax = plt.subplots()
-l = ax.plot(x, y)
-mt.line_annotate("awesome function", l)
-ax.set_yscale("log")
-mt.grid(ax)
+x = np.linspace(-5, 5)
+ax.plot(x, x ** 2)
+mt.grid(ax)  # Show grid lines.
 plt.show()
 ```
 
