@@ -65,8 +65,6 @@ mystyle_21_10 = {
 colorblind = seaborn_colorblind_10
 mystyle = mystyle_21_10
 
-matplotlib.pyplot.style.use([colorblind, mystyle])
-
 
 def use(styles: Optional[Union[Style, Sequence[Style]]] = None) -> None:
     """Use the given styles."""
