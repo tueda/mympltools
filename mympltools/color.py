@@ -1,10 +1,12 @@
 """Color utility functions."""
 import colorsys
-from typing import Tuple, Union
+from typing import Optional, Tuple, Union
 
 import matplotlib.colors
+import matplotlib.pyplot as plt
+import numpy as np
 
-__all__ = ("adjust_lightness", "blend", "brighter", "darker")
+__all__ = ("adjust_lightness", "blend", "brighter", "darker", "subcmap")
 
 ColorRGB = Tuple[float, float, float]
 Color = Union[str, ColorRGB]
@@ -44,4 +46,23 @@ def blend(color1: Color, color2: Color, ratio: float = 0.5) -> ColorRGB:
         c1[0] * (1 - ratio) + c2[0] * ratio,
         c1[1] * (1 - ratio) + c2[1] * ratio,
         c1[2] * (1 - ratio) + c2[2] * ratio,
+    )
+
+
+# See also: https://stackoverflow.com/a/18926541
+def subcmap(
+    cmap: Union[matplotlib.colors.Colormap, str],
+    minval: float = 0.0,
+    maxval: float = 1.0,
+    n: Optional[int] = None,
+) -> matplotlib.colors.Colormap:
+    """Return a part of the given color map."""
+    if isinstance(cmap, str):
+        cmap = plt.get_cmap(cmap)
+    if n is None:
+        n = cmap.N
+    return matplotlib.colors.LinearSegmentedColormap.from_list(
+        f"subcmap({cmap.name},{minval},{maxval})",
+        cmap(np.linspace(minval, maxval, n)),
+        n,
     )
