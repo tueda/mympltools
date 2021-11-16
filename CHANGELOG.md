@@ -1,7 +1,7 @@
 # Changelog
 
-<a name="20.11.1"></a>
-## [20.11.1] (2021-11-16)
+<a name="21.11.0"></a>
+## [21.11.0] (2021-11-16)
 ### BREAKING CHANGE
 - We stop automatically changing the style when `mympltools` is imported.
   This change allows one to use some utility functions in this package without
@@ -31,5 +31,5 @@
 - First release.
 
 
-[20.11.1]: https://github.com/tueda/mympltools/compare/21.10.1...20.11.1
+[21.11.0]: https://github.com/tueda/mympltools/compare/21.10.1...21.11.0
 [21.10.1]: https://github.com/tueda/mympltools/compare/21.10.0...21.10.1
