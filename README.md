@@ -9,12 +9,12 @@ Getting Started
 
 [Pip](https://pip.pypa.io/en/stable/):
 ```bash
-pip install git+https://github.com/tueda/mympltools.git@21.10.1
+pip install git+https://github.com/tueda/mympltools.git@21.11.0
 ```
 
 [Poetry](https://python-poetry.org/):
 ```bash
-poetry add git+https://github.com/tueda/mympltools.git@21.10.1
+poetry add git+https://github.com/tueda/mympltools.git@21.11.0
 ```
 
 It is recommended to specify the version completely in case of future incompatible changes.
