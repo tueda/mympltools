@@ -4,6 +4,16 @@ mympltools
 My personal utilities and settings for [Matplotlib](https://matplotlib.org/).
 
 
+Requirements
+------------
+
+- Python >= 3.7
+- pip >= 19.0
+
+Note that early versions of Python 3.7.x may be shipped with older pip.
+If this is the case, you need to upgrade pip first.
+
+
 Getting Started
 ---------------
 
