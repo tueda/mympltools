@@ -30,8 +30,8 @@ poetry add git+https://github.com/tueda/mympltools.git@21.11.0
 It is recommended to specify the version completely in case of future incompatible changes.
 
 
-Examples
---------
+Example
+-------
 
 ```python
 import matplotlib.pyplot as plt
