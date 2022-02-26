@@ -6,7 +6,7 @@ import matplotlib.collections
 import matplotlib.lines
 import numpy as np
 
-from .npt_compat import ArrayLike, NDArray1D
+from .npt_compat import ArrayLike, NDArray1D, NDArray2D
 
 __all__ = ("errorband", "grid", "line_annotate")
 
@@ -204,7 +204,7 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
         def find_neighbors(
             x: float, xs: NDArray1D, ys: NDArray1D, reverse: bool = True
         ) -> Tuple[Tuple[float, float], Tuple[float, float]]:
-            (indices,) = np.where((xs <= x)[:-1] & (xs > x)[1:])  # type: ignore[index]
+            (indices,) = np.where((xs <= x)[:-1] & (xs > x)[1:])
             if len(indices) == 0:
                 if not reverse:
                     raise AssertionError("line must cross x")
@@ -226,7 +226,8 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
                     n2 = n1[0] + 1, n1[1]
                 else:
                     n2 = n3
-        self._neighbours = np.asarray([n1, n2])
+        self._neighbours: NDArray2D = np.asarray([n1, n2])
+        print(self._neighbours)
 
         # Calculate y by interpolating neighbouring points.
         y = n1[1] + ((x - n1[0]) * (n2[1] - n1[1]) / (n2[0] - n1[0]))
@@ -241,9 +242,7 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
     def get_rotation(self) -> float:
         """Determine the angle of the slope of the neighbours."""
         trans_data = self._line.get_transform()
-        dx, dy = np.diff(  # type: ignore[no-untyped-call]
-            trans_data.transform(self._neighbours), axis=0
-        ).squeeze()
+        dx, dy = np.diff(trans_data.transform(self._neighbours), axis=0).squeeze()
         return float(np.rad2deg(np.arctan2(dy, dx)) + super().get_rotation())
 
     def update_positions(self, renderer: matplotlib.backend_bases.RendererBase) -> None:

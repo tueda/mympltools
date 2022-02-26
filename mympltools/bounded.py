@@ -142,8 +142,8 @@ class Bounded:
                 raise ValueError("xs must be a 2-dimensional array")
 
             xx = np.stack(xs).T  # type: ignore[call-overload]
-            self_x1 = np.min(xx, axis=1)  # type: ignore[no-untyped-call]
-            self_x2 = np.max(xx, axis=1)  # type: ignore[no-untyped-call]
+            self_x1 = np.min(xx, axis=1)
+            self_x2 = np.max(xx, axis=1)
         else:
             self_x1 = x
             self_x2 = x
@@ -151,7 +151,7 @@ class Bounded:
         if self_x.shape != self_x1.shape or self_x.shape != self_x2.shape:
             raise ValueError("central, lower, upper values must have the same shape")
 
-        if np.any((self_x < self_x1) | (self_x2 < self_x)):  # type: ignore[operator]
+        if np.any((self_x < self_x1) | (self_x2 < self_x)):
             raise ValueError("x is out of range [xlo, xhi]")
 
         object.__setattr__(self, "x", self_x)
@@ -164,7 +164,7 @@ class Bounded:
         x = self.x
         x1 = self.x1
         x2 = self.x2
-        return np.max(  # type: ignore[no-any-return, no-untyped-call]
+        return np.max(  # type: ignore[no-any-return]
             np.stack((x - x1, x2 - x)).T, axis=1
         )
 
@@ -352,15 +352,11 @@ class Bounded:
             y = other.x
             y1 = other.x1
             y2 = other.x2
-            have_zero = (y1 <= 0) & (0 <= y2)  # type: ignore[operator]
-            w12 = np.stack((y1 * np.inf, 1 / y1, 1 / y2, y2 * np.inf)).T
+            have_zero = (y1 <= 0) & (0 <= y2)
+            w12: NDArray2D = np.stack((y1 * np.inf, 1 / y1, 1 / y2, y2 * np.inf)).T
             w: NDArray1D = 1 / y
-            w1 = np.where(
-                have_zero, np.min(w12, axis=1), 1 / y2  # type: ignore[no-untyped-call]
-            )
-            w2 = np.where(
-                have_zero, np.max(w12, axis=1), 1 / y1  # type: ignore[no-untyped-call]
-            )
+            w1 = np.where(have_zero, np.min(w12, axis=1), 1 / y2)
+            w2 = np.where(have_zero, np.max(w12, axis=1), 1 / y1)
             return self * Bounded(w, xlo=w1, xhi=w2)
         elif isinstance(other, (int, float, np.ndarray)):
             x = self.x
@@ -387,17 +383,15 @@ class Bounded:
             x1 = self.x1
             x2 = self.x2
             y = other
-            z: NDArray1D = x ** y
+            z: NDArray1D = x**y
             if y % 2 == 0:
-                have_zero = (x1 <= 0) & (0 <= x2)  # type: ignore[operator]
-                z12 = np.stack((x1 ** y, x2 ** y)).T
-                z1 = np.where(
-                    have_zero, 0, np.min(z12, axis=1)  # type: ignore[no-untyped-call]
-                )
-                z2 = np.max(z12, axis=1)  # type: ignore[no-untyped-call]
+                have_zero = (x1 <= 0) & (0 <= x2)
+                z12: NDArray2D = np.stack((x1**y, x2**y)).T
+                z1 = np.where(have_zero, 0, np.min(z12, axis=1))
+                z2 = np.max(z12, axis=1)
             else:
-                z1 = x1 ** y
-                z2 = x2 ** y
+                z1 = x1**y
+                z2 = x2**y
             return Bounded(z, xlo=z1, xhi=z2)
         else:
             return NotImplemented

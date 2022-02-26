@@ -42,7 +42,7 @@ mt.use("21.10")  # Use the style.
 
 fig, ax = plt.subplots()
 x = np.linspace(-5, 5)
-ax.plot(x, x ** 2)
+ax.plot(x, x**2)
 mt.grid(ax)  # Show grid lines.
 plt.show()
 ```

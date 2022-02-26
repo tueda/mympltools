@@ -120,13 +120,13 @@ def test_bounded_div() -> None:
 def test_bounded_pow() -> None:
     a = mt.Bounded([-4, -2, 1, 8], xlo=[-5, -7, -4, 7], xhi=[-3, 3, 5, 9])
     n = 4
-    c = a ** n
+    c = a**n
     assert c == mt.Bounded(
         [256, 16, 1, 4096], xlo=[81, 0, 0, 2401], xhi=[625, 2401, 625, 6561]
     )
 
     n = 5
-    c = a ** n
+    c = a**n
     assert c == mt.Bounded(
         [-1024, -32, 1, 32768],
         xlo=[-3125, -16807, -1024, 16807],
