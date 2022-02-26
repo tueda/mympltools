@@ -33,10 +33,11 @@ function version_bump() {
   local urlbase=git+https://github.com/tueda/mympltools.git
   sed -i "s|pip install $urlbase@.*|pip install $urlbase@$v$1|" README.md
   sed -i "s|poetry add $urlbase@.*|poetry add $urlbase@$v$1|" README.md
+  sed -i "s|pdm add $urlbase@.*|pdm add $urlbase@$v$1|" README.md
   sed -i "s|Install mympltools .* only when running on|Install mympltools $1 only when running on|" examples/Examples.ipynb
   sed -i "s|pip install $urlbase@.*\"|pip install $urlbase@$v$1\"|" examples/Examples.ipynb
   # Check if the files are changed.
-  [[ $(numstat README.md) == '2,2' ]]
+  [[ $(numstat README.md) == '3,3' ]]
   [[ $(numstat examples/Examples.ipynb) == '2,2' ]]
 }
 

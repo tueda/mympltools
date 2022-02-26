@@ -17,7 +17,7 @@ If this is the case, you need to upgrade pip first.
 Getting Started
 ---------------
 
-[Pip](https://pip.pypa.io/en/stable/):
+[Pip](https://pip.pypa.io/):
 ```bash
 pip install git+https://github.com/tueda/mympltools.git@21.11.0
 ```
@@ -25,6 +25,11 @@ pip install git+https://github.com/tueda/mympltools.git@21.11.0
 [Poetry](https://python-poetry.org/):
 ```bash
 poetry add git+https://github.com/tueda/mympltools.git@21.11.0
+```
+
+[PDM](https://pdm.fming.dev/):
+```bash
+pdm add git+https://github.com/tueda/mympltools.git@21.11.0
 ```
 
 It is recommended to specify the version completely in case of future incompatible changes.
