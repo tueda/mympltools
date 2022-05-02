@@ -9,6 +9,13 @@ python = "^3.7"
 
 importlib-metadata = { version = ">=1.0", python = "<3.8" }
 matplotlib = "^3.0"
+# ensure wheels
+numpy = [
+    { version = "~1.21.6", python = "3.7" },
+    { version = "^1.21.3", python = "3.10" },
+]
+# optional
+scipy = { version = "^1.4.0", optional = true }
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.18.1"
@@ -19,11 +26,13 @@ taskipy = "^1.10.1"
 scipy = [
     { version = "^1.7.3", python = "^3.7,<3.11" }, # 1.8.0 requires python>=3.8,<3.11
 ]
-# for wheel
-numpy = [{ version = "^1.21.3", python = "3.10" }]
+
 # for vscode
 black = "^22.3.0"
 ipykernel = "^6.13.0"
+
+[tool.poetry.extras]
+fitting = ["scipy"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
