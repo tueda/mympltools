@@ -257,7 +257,7 @@ class Bounded:
             y1 = y
             y2 = y
         else:
-            return NotImplemented
+            return NotImplemented  # type: ignore[unreachable]
 
         return Bounded(x + y, xlo=x1 + y1, xhi=x2 + y2)
 
@@ -295,7 +295,7 @@ class Bounded:
             y1 = y
             y2 = y
         else:
-            return NotImplemented
+            return NotImplemented  # type: ignore[unreachable]
 
         return Bounded(x - y, xlo=x1 - y2, xhi=x2 - y1)
 
@@ -332,7 +332,7 @@ class Bounded:
 
             return Bounded(x * y, xs=(x1 * y, x2 * y))
         else:
-            return NotImplemented
+            return NotImplemented  # type: ignore[unreachable]
 
     def __rmul__(self, other: Union[int, float]) -> "Bounded":
         """Return ``other * self``."""
@@ -365,7 +365,7 @@ class Bounded:
             y = other  # type: ignore[assignment]
             return Bounded(x / y, xs=(x1 / y, x2 / y))
         else:
-            return NotImplemented
+            return NotImplemented  # type: ignore[unreachable]
 
     def __rtruediv__(self, other: Union[int, float]) -> "Bounded":
         """Return ``other / self``."""
