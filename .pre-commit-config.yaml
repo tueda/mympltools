@@ -54,6 +54,10 @@ repos:
         additional_dependencies:
         -   isort==5.10.1
     -   id: nbqa-mypy
+        args: [
+            --allow-untyped-call,
+            --allow-untyped-defs
+        ]
         additional_dependencies:
         -   mypy==0.950
         -   numpy==1.22.3
