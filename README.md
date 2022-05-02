@@ -7,11 +7,13 @@ My personal utilities and settings for [Matplotlib](https://matplotlib.org/).
 Requirements
 ------------
 
-- Python >= 3.7
-- pip >= 19.0
+- [Python](https://www.python.org/) >= 3.7
+- [pip](https://pip.pypa.io/) >= 19.0
+- [SciPy](https://scipy.org/) >= 1.4.0 (optional, for fitting)
 
 Note that early versions of Python 3.7.x may be shipped with older pip.
-If this is the case, you need to upgrade pip first.
+If this is the case, you need to
+[upgrade pip](https://pip.pypa.io/en/stable/installation/#upgrading-pip) first.
 
 
 Getting Started

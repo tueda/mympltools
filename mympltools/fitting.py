@@ -1,7 +1,7 @@
 """Fitting routines."""
 
 import dataclasses
-from typing import Callable, Generic, TypeVar
+from typing import Callable, Generic, Optional, Tuple, TypeVar
 
 import numpy as np
 
@@ -28,22 +28,24 @@ class Model(Generic[T]):
 
 
 def fit(
-    f: Callable[..., T], xdata: ArrayLike, ydata: ArrayLike, yerr: ArrayLike
+    f: Callable[..., T],
+    xdata: ArrayLike,
+    ydata: ArrayLike,
+    yerr: ArrayLike,
+    *,
+    p0: Optional[ArrayLike] = None,
+    bounds: Optional[Tuple[ArrayLike, ArrayLike]] = (-np.inf, np.inf),
 ) -> Model[T]:
     """Fit a function to data."""
     import scipy.optimize
     import scipy.stats.distributions
 
-    xdata = np.atleast_1d(xdata)
-    ydata = np.atleast_1d(ydata)
-    yerr = np.atleast_1d(yerr)
-
     popt, pcov = scipy.optimize.curve_fit(
-        f, xdata, ydata, sigma=yerr, absolute_sigma=True
+        f, xdata, ydata, p0=p0, sigma=yerr, absolute_sigma=True, bounds=bounds
     )
     perr = np.sqrt(np.diag(pcov))
-    chi2 = np.sum(((f(xdata, *popt) - ydata) / yerr) ** 2)
-    ndf = len(xdata) - len(popt)
+    chi2 = np.sum(((f(xdata, *popt) - ydata) / yerr) ** 2)  # type: ignore[operator]
+    ndf = len(xdata) - len(popt)  # type: ignore[arg-type]
     p_value = scipy.stats.distributions.chi2.sf(chi2, ndf)
 
     return Model(f, popt, perr, pcov, chi2, ndf, p_value)
