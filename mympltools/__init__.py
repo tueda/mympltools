@@ -2,12 +2,14 @@
 from . import bounded, color, plot, style  # noqa: F401
 from .bounded import Bounded
 from .color import adjust_lightness, blend, brighter, darker, subcmap
+from .fitting import Model, fit
 from .plot import errorband, grid, line_annotate
 from .style import colorblind, mystyle, mystyle_21_10, seaborn_colorblind_10, use
 from .version import __version__
 
 __all__ = (
     "Bounded",
+    "Model",
     "__version__",
     "adjust_lightness",
     "blend",
@@ -15,6 +17,7 @@ __all__ = (
     "colorblind",
     "darker",
     "errorband",
+    "fit",
     "grid",
     "line_annotate",
     "mystyle",

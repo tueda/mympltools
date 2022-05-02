@@ -15,6 +15,12 @@ pre-commit = "^2.18.1"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 taskipy = "^1.10.1"
+# optional
+scipy = [
+    { version = "^1.7.3", python = "^3.7,<3.11" }, # 1.8.0 requires python>=3.8,<3.11
+]
+# for wheel
+numpy = [{ version = "^1.21.3", python = "3.10" }]
 # for vscode
 black = "^22.3.0"
 ipykernel = "^6.13.0"
@@ -42,7 +48,7 @@ strict = true
 warn_unreachable = true
 
 [[tool.mypy.overrides]]
-module = ["cycler.*", "importlib_metadata", "matplotlib.*"]
+module = ["cycler.*", "importlib_metadata", "matplotlib.*", "scipy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
