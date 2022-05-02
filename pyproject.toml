@@ -20,7 +20,10 @@ scipy = [
     { version = "^1.7.3", python = "^3.7,<3.11" }, # 1.8.0 requires python>=3.8,<3.11
 ]
 # for wheel
-numpy = [{ version = "^1.21.3", python = "3.10" }]
+numpy = [
+    { version = "~1.21.6", python = "3.7" },
+    { version = "^1.21.3", python = "3.10" },
+]
 # for vscode
 black = "^22.3.0"
 ipykernel = "^6.13.0"
