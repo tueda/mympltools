@@ -1,4 +1,6 @@
 """Routines to handle uncertainties by the interval arithmetic."""
+from __future__ import annotations
+
 import dataclasses
 from typing import Any, Optional, Union, cast, overload
 
@@ -228,11 +230,11 @@ class Bounded:
         else:
             return NotImplemented
 
-    def __pos__(self) -> "Bounded":
+    def __pos__(self) -> Bounded:
         """Return ``+ self``."""
         return self
 
-    def __neg__(self) -> "Bounded":
+    def __neg__(self) -> Bounded:
         """Return ``- self``."""
         x = self.x
         x1 = self.x1
@@ -240,7 +242,7 @@ class Bounded:
 
         return Bounded(-x, xs=(-x1, -x2))
 
-    def __add__(self, other: Union["Bounded", int, float, NDArray1D]) -> "Bounded":
+    def __add__(self, other: Union[Bounded, int, float, NDArray1D]) -> Bounded:
         """Return ``self + other``."""
         if isinstance(other, Bounded):
             x = self.x
@@ -264,7 +266,7 @@ class Bounded:
     # NOTE: unfortunately, if we add np.ndarray to the signature of __radd__ etc.,
     # then "unsafely overlapping" happens.
 
-    def __radd__(self, other: Union[int, float]) -> "Bounded":
+    def __radd__(self, other: Union[int, float]) -> Bounded:
         """Return ``other + self``."""
         if isinstance(other, (int, float, np.ndarray)):
             x = other
@@ -278,7 +280,7 @@ class Bounded:
 
         return Bounded(x + y, xlo=x1 + y1, xhi=x2 + y2)
 
-    def __sub__(self, other: Union["Bounded", int, float, NDArray1D]) -> "Bounded":
+    def __sub__(self, other: Union[Bounded, int, float, NDArray1D]) -> Bounded:
         """Return ``self - other``."""
         if isinstance(other, Bounded):
             x = self.x
@@ -299,7 +301,7 @@ class Bounded:
 
         return Bounded(x - y, xlo=x1 - y2, xhi=x2 - y1)
 
-    def __rsub__(self, other: Union[int, float]) -> "Bounded":
+    def __rsub__(self, other: Union[int, float]) -> Bounded:
         """Return ``other - self``."""
         if isinstance(other, (int, float, np.ndarray)):
             x = other
@@ -313,7 +315,7 @@ class Bounded:
 
         return Bounded(x - y, xlo=x1 - y2, xhi=x2 - y1)
 
-    def __mul__(self, other: Union["Bounded", int, float, NDArray1D]) -> "Bounded":
+    def __mul__(self, other: Union[Bounded, int, float, NDArray1D]) -> Bounded:
         """Return ``self * other``."""
         if isinstance(other, Bounded):
             x = self.x
@@ -334,7 +336,7 @@ class Bounded:
         else:
             return NotImplemented  # type: ignore[unreachable]
 
-    def __rmul__(self, other: Union[int, float]) -> "Bounded":
+    def __rmul__(self, other: Union[int, float]) -> Bounded:
         """Return ``other * self``."""
         if isinstance(other, (int, float, np.ndarray)):
             x = other
@@ -346,7 +348,7 @@ class Bounded:
 
         return Bounded(x * y, xs=(x * y1, x * y2))
 
-    def __truediv__(self, other: Union["Bounded", int, float, NDArray1D]) -> "Bounded":
+    def __truediv__(self, other: Union[Bounded, int, float, NDArray1D]) -> Bounded:
         """Return ``self / other``."""
         if isinstance(other, Bounded):
             y = other.x
@@ -367,7 +369,7 @@ class Bounded:
         else:
             return NotImplemented  # type: ignore[unreachable]
 
-    def __rtruediv__(self, other: Union[int, float]) -> "Bounded":
+    def __rtruediv__(self, other: Union[int, float]) -> Bounded:
         """Return ``other / self``."""
         if isinstance(other, (int, float)):
             return Bounded(np.full(self.x.shape, other)) / self
@@ -376,7 +378,7 @@ class Bounded:
         else:
             return NotImplemented
 
-    def __pow__(self, other: int) -> "Bounded":
+    def __pow__(self, other: int) -> Bounded:
         """Return ``self ** other``."""
         if isinstance(other, int) and other >= 1:
             x = self.x
