@@ -1,5 +1,15 @@
 # Changelog
 
+<a name="22.5.0"></a>
+## [22.5.0] (2022-05-03)
+### Added
+- `fitting` module, a wrapper module for
+  [scipy.optimize](https://docs.scipy.org/doc/scipy/reference/optimize.html).
+  To use the `fit` function in this module, SciPy is required.
+  One can specify the pip extra `#egg=mympltools[fitting]` to install SciPy as a dependency.
+  ([9d71f6b](https://github.com/tueda/mympltools/commit/9d71f6bf345388bc75033eb873f8774e06275311))
+
+
 <a name="21.11.0"></a>
 ## [21.11.0] (2021-11-16)
 ### BREAKING CHANGE
@@ -31,5 +41,6 @@
 - First release.
 
 
+[22.5.0]: https://github.com/tueda/mympltools/compare/21.11.0...22.5.0
 [21.11.0]: https://github.com/tueda/mympltools/compare/21.10.1...21.11.0
 [21.10.1]: https://github.com/tueda/mympltools/compare/21.10.0...21.10.1
