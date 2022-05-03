@@ -227,7 +227,6 @@ class LineAnnotation(matplotlib.text.Annotation):  # type: ignore[misc]
                 else:
                     n2 = n3
         self._neighbours: NDArray2D = np.asarray([n1, n2])
-        print(self._neighbours)
 
         # Calculate y by interpolating neighbouring points.
         y = n1[1] + ((x - n1[0]) * (n2[1] - n1[1]) / (n2[0] - n1[0]))
