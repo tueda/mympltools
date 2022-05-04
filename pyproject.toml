@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mympltools"
-version = "22.5.1-alpha.0"
+version = "22.5.1"
 description = "My personal utilities and settings for Matplotlib."
 authors = ["Takahiro Ueda <tueda@st.seikei.ac.jp>"]
 
