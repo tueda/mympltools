@@ -1,5 +1,13 @@
 # Changelog
 
+
+<a name="22.5.1"></a>
+## [22.5.1] (2022-05-04)
+### Fixed
+- Remove `print` for debugging.
+  ([52a7926](https://github.com/tueda/mympltools/commit/52a7926730b71bcfde7b140ef5d7a236283688f5))
+
+
 <a name="22.5.0"></a>
 ## [22.5.0] (2022-05-03)
 ### Added
@@ -41,6 +49,7 @@
 - First release.
 
 
+[22.5.1]: https://github.com/tueda/mympltools/compare/22.5.0...22.5.1
 [22.5.0]: https://github.com/tueda/mympltools/compare/21.11.0...22.5.0
 [21.11.0]: https://github.com/tueda/mympltools/compare/21.10.1...21.11.0
 [21.10.1]: https://github.com/tueda/mympltools/compare/21.10.0...21.10.1
