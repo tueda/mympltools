@@ -68,13 +68,11 @@ class Bounded:
                 # 2 columns.
                 dx = x[:, 1]
                 x = x[:, 0]
-                x = cast(NDArray1D, x)
             elif x.shape[1] == 3:
                 # 3 columns.
                 dx = x[:, 1]
                 dx2 = x[:, 2]
                 x = x[:, 0]
-                x = cast(NDArray1D, x)
             else:
                 raise ValueError(f"x has invalid shape: {x.shape}")
 
@@ -92,8 +90,7 @@ class Bounded:
             if xs is not None:
                 raise ValueError("dx cannot be used with xs")
 
-            dx = np.abs(np.atleast_1d(dx))
-            dx = cast(NDArray1D, dx)
+            dx = cast(NDArray1D, np.abs(np.atleast_1d(dx)))
             if len(dx.shape) != 1:
                 raise ValueError("dx must be a 1-dimensional array")
             if x.shape[0] != 1 and dx.shape[0] != 1 and x.shape[0] != dx.shape[0]:
@@ -106,8 +103,7 @@ class Bounded:
                 self_x1 = x - dx
                 self_x2 = x + dx
             else:
-                dx2 = np.abs(np.atleast_1d(dx2))
-                dx2 = cast(NDArray1D, dx2)
+                dx2 = cast(NDArray1D, np.abs(np.atleast_1d(dx2)))
                 if len(dx2.shape) != 1:
                     raise ValueError("dx2 must be a 1-dimensional array")
                 if x.shape[0] != 1 and dx2.shape[0] != 1 and x.shape[0] != dx2.shape[0]:

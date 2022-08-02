@@ -15,21 +15,20 @@ numpy = [
     { version = "^1.21.3", python = "3.10" },
 ]
 # optional
-scipy = { version = "^1.4.0", optional = true }
+scipy = { version = "^1.4", optional = true }
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.18.1"
-pytest = "^7.1.2"
-pytest-cov = "^3.0.0"
-taskipy = "^1.10.1"
+pre-commit = "^2.20.0"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+taskipy = "^1.10.3"
 # optional
 scipy = [
     { version = "^1.7.3", python = "^3.7,<3.11" }, # 1.8.0 requires python>=3.8,<3.11
 ]
-
 # for vscode
-black = "^22.3.0"
-ipykernel = "^6.13.0"
+black = "^22.10.0"
+ipykernel = "^6.16.2"  # 6.17 requires python>=3.8
 
 [tool.poetry.extras]
 fitting = ["scipy"]
@@ -70,7 +69,7 @@ addopts = [
 
 [tool.taskipy.tasks]
 # Prepare a development environment.
-prepare = "pre-commit install && pre-commit install --hook-type commit-msg"
+prepare = "pre-commit install --hook-type pre-commit && pre-commit install --hook-type commit-msg"
 
 # Run linters (+ fix).
 lint = "pre-commit run --all-files"
